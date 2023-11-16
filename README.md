@@ -32,8 +32,13 @@
 1. ~~抓包，实现request库自动爬取~~
 
 # 注意事项
-1. 使用之前需要魔法下载chromium.exe
-
+1. 使用之前配置环境，命令如下
+   ```
+   pip3 install pyppeteer
+   pyppeteer-install
+   ```
+   运行之后 Pyppeteer 会下载一个 Chromium 浏览器并配置好环境变量
+   
 # Remember
 1. 打包命令： pyinstaller --noconsole --onefile --icon=autologin.ico --name AutoLogin_DLMU main.py
 
