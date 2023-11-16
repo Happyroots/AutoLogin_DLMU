@@ -37,7 +37,7 @@
    pip3 install pyppeteer
    pyppeteer-install
    ```
-   运行之后 Pyppeteer 会下载一个 Chromium 浏览器并配置好环境变量
+   运行之后 Pyppeteer 会下载一个 Chromium 浏览器并配置好环境变量。第二步需要魔法上网，要不无法下载浏览器。试试命令行CMD能不能魔法，有的代理可能需要选项
    
 # Remember
 1. 打包命令： pyinstaller --noconsole --onefile --icon=autologin.ico --name AutoLogin_DLMU main.py
