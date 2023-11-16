@@ -80,7 +80,7 @@ def edit_regedit():
 
     try:
         key_autorun = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, r"SOFTWARE\Microsoft\Windows\CurrentVersion\Run")
-        autorun_value, type2 = winreg.QueryValueEx(key_autorun, r'i-NUSIT1.0')
+        autorun_value, type2 = winreg.QueryValueEx(key_autorun, key_name)
         if autorun_value != 0:
             autorun_value_flag = 0
         #print(autorun_value)
@@ -89,37 +89,61 @@ def edit_regedit():
     except NameError:
         autorun_value_flag = 1
     list=[browser_value, autorun_value_flag]
-    #print(browser_value)
-    #print(list)
 
     current_path = os.path.dirname(os.path.abspath(__file__))
     # exe_path = os.path.join(current_path, "..", "main.exe")
-
     exe_path = os.path.join(current_path, "..", "dist", "main", "main.exe")
 
     registry_content = f"""
     Windows Registry Editor Version 5.00
 
     [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run]
-    "autoLogin_DLMU"="{exe_path}"
-    """
+    "autoLogin_DLMU"="{exe_path}" 
+    """ 
+    # registry_content = f"""
+    # Windows Registry Editor Version 5.00
 
+    # [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NlaSvc\Parameters\Internet]
+    # "EnableActiveProbing"=dword:1
+
+    # [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run]
+    # "i-NUSIT1.0"=-
+    # """
     with open("registration.reg", "w") as reg_file:
         reg_file.write(registry_content)
 
-
-    # if browser_value != 0:
-    #     print("【关闭联网弹窗-注册表已写入】")
-    #     print(' ')
-    #     os.system('regedit /s ' + current_path + '\\modify.reg')
     if autorun_value_flag != 0:
         print('【开机自启动-注册表已写入】')
         print(' ')
         subprocess.Popen(['regedit', '/s', current_path + '\\..\\registration.reg'], shell=True)
-        # os.system('regedit /s ' + current_path + '\\..\\registration.reg')
+        os.system('regedit /s ' + current_path + '\\..\\registration.reg')
     else:
         pass
     return browser_value,autorun_value_flag
 
+def recover_regedit():
+    # registry_content = f"""
+    # Windows Registry Editor Version 5.00
+
+    # [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run]
+    # "autoLogin_DLMU"="-" 
+    # """
+    registry_content = fr"""
+    Windows Registry Editor Version 5.00
+
+    [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NlaSvc\Parameters\Internet]
+    "EnableActiveProbing"=dword:1
+
+    [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run]
+    "i-NUSIT1.0"=-"""
+
+    with open("registration.reg", "w") as reg_file:
+        reg_file.write(registry_content)
+
+    print('【开机自启动-注册表已写入】')
+    print(' ')
+    subprocess.Popen(['regedit', '/s', current_path + '\\..\\registration.reg'], shell=True)
+
+
 if __name__ == "__main__":
-    edit_regedit()
+    recover_regedit()
