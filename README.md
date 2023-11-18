@@ -2,7 +2,7 @@
 自动登录大连海事校园网（电脑网线端）
 [![GitHub repo size in bytes](https://img.shields.io/github/repo-size/Downtime111/i-NUSIT-AutoLogin.svg)](https://github.com/Downtime111/i-NUSIT-AutoLogin)  [![Github All Releases](https://img.shields.io/github/downloads/Downtime111/i-NUSIT-AutoLogin/total.svg)](http://github.com/Downtime111/i-NUSIT-AutoLogin/releases)  [![GitHub release](https://img.shields.io/github/release/Downtime111/i-NUSIT-AutoLogin.svg)](http://github.com/Downtime111/i-NUSIT-AutoLogin/releases)  [![GitHub issues](https://img.shields.io/github/issues/Downtime111/i-NUSIT-AutoLogin.svg)](https://github.com/Downtime111/i-NUSIT-AutoLogin/issues)
 
-# 背景
+# Background
 出差或放假等场景需要远程连接使用学校的电脑，但是校园网月初会自动断开，导致无法远程，所以萌生了自动连接校园网的需求。
 
 # Todo
@@ -23,7 +23,7 @@
 * 装饰器
 * 实现休眠后登陆时自动联网
 
-# issue
+# Issue
 1. 校园网登录的网址不知道是什么。为了防爬，先请求网络才可以获得有效网址，一般的网址请求网络，百度，B站都免疫。解决方法：需要登录时，在浏览器上临时粘贴
 2. 由于采用了协程，导致运行非常慢，后面尝试多线程
 3. 有些包是win特有的，无法跨平台
@@ -31,7 +31,7 @@
 # Advance
 1. 抓包，实现request库自动爬取
 
-# 注意事项
+# Caution
 1. 使用之前配置环境，命令如下
    ```
    pip3 install pyppeteer
