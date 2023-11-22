@@ -11,19 +11,28 @@ from utils.create_desktop_shortcut import create_desktop_shortcut
 import sys
 
 def check_and_login():
-    if(is_Connected() == False):
-        autologin_pyppeteer()
+    try:
+        if(is_Connected() == False):
+            autologin_pyppeteer()
+    except:
+        print("first connect error")
 
 def schedule_task(_hour=8, _minute=8, _second=0, _microsecond=0):
     delay = calculate_delay_time(_hour, _minute, _second, _microsecond)
     schedule.every(delay).seconds.do(check_and_login)
 
+
 def main():
+    # if(is_Connected() == False):
+    #     autologin_pyppeteer()
     check_and_login()
     while (True):
-        schedule_task(8, 8)
-        schedule.run_pending()
-        time.sleep(1)
+        try:
+            schedule_task(8, 8)
+            schedule.run_pending()
+            time.sleep(1)
+        except:
+            print("connect error")
         if (flag.exit_flag):
             print("exit")
             break
