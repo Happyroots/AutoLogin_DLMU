@@ -1,21 +1,21 @@
 import requests
 import subprocess
-
+# 由于代理的原因，测试联网不太好用
 def get_status_ping():
-    # https://sunlogin.oray.com/
+    test_url = 'www.bing.com'
     r = subprocess.run(
-                        'ping www.cnki.net -n 1',
+                        'ping ' + test_url + ' -n 1',
                         # 'ping https://cn.bing.com/search?pglt=515&q=cnki&cvid=d33960dfab8143d59caf4e9607bad3f7&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7MgYIARBFGEEyBggCEEUYQTIGCAMQRRhBMgYIBBBFGDwyBggFEEUYPNIBCDEwNjJqMGoxqAIAsAIA&FORM=ANNTA1&PC=CNNDDB -n 1',
                        stdout=subprocess.PIPE,
                        stderr=subprocess.PIPE,
                        stdin= subprocess.PIPE,
                        shell=True)
-    # print(r.returncode)
+    print("登录页面状态码:", r.returncode)
     return r.returncode
 
 def get_status_requests(login_html = "http://www.cnki.net"): #不好用
-    # login_html = "http://www.cnki.net"
-    login_html = "https://cn.bing.com/search?pglt=515&q=cnki&cvid=d33960dfab8143d59caf4e9607bad3f7&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7MgYIARBFGEEyBggCEEUYQTIGCAMQRRhBMgYIBBBFGDwyBggFEEUYPNIBCDEwNjJqMGoxqAIAsAIA&FORM=ANNTA1&PC=CNNDDB"
+    login_html = "https://sunlogin.oray.com"
+    # login_html = "https://cn.bing.com/search?pglt=515&q=cnki&cvid=d33960dfab8143d59caf4e9607bad3f7&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7MgYIARBFGEEyBggCEEUYQTIGCAMQRRhBMgYIBBBFGDwyBggFEEUYPNIBCDEwNjJqMGoxqAIAsAIA&FORM=ANNTA1&PC=CNNDDB"
     try:
         page_status = requests.get(login_html, timeout=1)
         response = page_status.status_code
@@ -28,15 +28,15 @@ def get_status_requests(login_html = "http://www.cnki.net"): #不好用
 
 def is_Connected():
     connect = False
-    # response = get_status_ping()
-    # if(response == 1):
-    #     connect = False
-    # elif(response == 0):
-    #     connect = True
-    response = get_status_requests()
-    if(response == 200):
-            connect = True
-    elif(response == -1 or response == -2):
+    response = get_status_ping()
+    if(response == 1):
         connect = False
+    elif(response == 0):
+        connect = True
+    # response = get_status_requests()
+    # if(response == 200):
+    #         connect = True
+    # elif(response == -1 or response == -2):
+    #     connect = False
         
     return connect
