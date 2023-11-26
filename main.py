@@ -9,6 +9,7 @@ import os
 from utils import flag
 from utils.create_desktop_shortcut import create_desktop_shortcut
 import sys
+import datetime
 
 def check_and_login():
     try:
@@ -25,14 +26,12 @@ def schedule_task(_hour=8, _minute=8, _second=0, _microsecond=0):
 def main():
     # if(is_Connected() == False):
     #     autologin_pyppeteer()
-    check_and_login()
+    autologin_pyppeteer()
     while (True):
-        try:
-            schedule_task(8, 8)
-            schedule.run_pending()
-            time.sleep(1)
-        except:
-            print("connect error")
+        now = datetime.time()
+        if(now.hour == 8 and now.minute == 8):
+            autologin_pyppeteer()
+        time.sleep(5)
         if (flag.exit_flag):
             print("exit")
             break
