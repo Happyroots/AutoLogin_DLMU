@@ -26,12 +26,12 @@ def schedule_task(_hour=8, _minute=8, _second=0, _microsecond=0):
 def main():
     # if(is_Connected() == False):
     #     autologin_pyppeteer()
-    autologin_pyppeteer()
+    # autologin_pyppeteer()
     while (True):
-        now = datetime.time()
-        if(now.hour == 8 and now.minute == 8):
+        now = datetime.datetime.now().time()        
+        if(now.hour == 8 and now.minute == 8 ):
             autologin_pyppeteer()
-        time.sleep(5)
+        time.sleep(25)
         if (flag.exit_flag):
             print("exit")
             break
