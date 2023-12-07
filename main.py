@@ -26,7 +26,7 @@ def schedule_task(_hour=8, _minute=8, _second=0, _microsecond=0):
 def main():
     # if(is_Connected() == False):
     #     autologin_pyppeteer()
-    # autologin_pyppeteer()
+    autologin_pyppeteer()
     while (True):
         now = datetime.datetime.now().time()        
         if(now.hour == 8 and now.minute == 8 ):
